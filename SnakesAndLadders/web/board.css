@@ -1,0 +1,93 @@
+body
+{
+	border:3px outset maroon;
+}
+
+
+#header
+{
+	height:100px;
+	
+	background-color:LightGray;
+	border-bottom:3px;
+	border-color:white;
+	border-style:solid;
+}
+
+#menubar
+{
+	height:40px;
+	
+	background-color:black;
+	border-bottom:3px;
+	border-color:white;
+	border-style:solid;
+}
+
+#menubar ul
+{
+	margin:auto;
+}
+
+#menubar li
+{
+	margin:3px 20px 3px 3px;
+	list-style-type:none;
+	display:inline;
+}
+
+#menubar li a
+{
+	color:white;
+	text-decoration:none;
+	font-weight:bold;
+	font-size:29px;
+	font-family:"MonoType Corsiva";
+	padding:5px 12px 7px;
+}
+
+#menubar li a:hover
+{
+	color:NavajoWhite;
+	text-decoration:underline;
+	font-weight:bold;
+}
+
+#complete
+{
+	background-image:url(gray_back.jpg);
+	height:850px;
+}
+
+#left
+{
+	float:left;
+	width:550px;
+	height:700px;
+}
+
+#middle
+{
+	float:middle;
+	margin:auto;
+
+}
+
+#left table
+{
+	border-style:solid;
+	border-color:green;
+	background-image:url(snake_board.jpg);
+}
+
+#left table td
+{
+	height:44px;
+	width:44px;
+}
+
+#middle table td
+{
+	height:20px;
+	width:110px;
+}

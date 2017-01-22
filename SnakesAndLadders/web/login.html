@@ -1,0 +1,230 @@
+ <!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <link href="main.css" rel="StyleSheet" type="text/css"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script>      
+        function validusername()
+{
+    var user_name=document.login.user_name;
+    var user_len=user_name.value.length;
+    var check=/^[a-zA-Z][\S]*$/;
+    if(user_len==0 || user_len<5 || user_len>10)
+            {
+                
+               alert("Enter valid  user name (5 to 10 characters and should start with alphabet)");
+               user_name.value="";
+               return false;
+            }
+        else
+            {
+                if(user_name.value.match(check))
+                    {
+                        return true;
+                    }
+                else
+                    {
+                        alert("Enter valid  user name (5 to 10 characters and should start with alphabet)");
+                        user_name.value="";
+                        return false;
+                    }
+            }
+}
+
+function validate_password()
+{
+    var check=/^[a-zA-Z0-9]+$/;
+    var password=document.login.user_password;
+    var pass_len=password.value.length;
+    if(pass_len>=5 && pass_len<=10 && password.value.match(check))
+        {
+            return true;
+        }
+    else
+        {
+            alert("Enter valid password (5 to 10 characters and only alphanumerics)");
+            password.value="";
+            return false;
+            
+        }
+}
+
+        function validate_login()
+      {
+          var username=document.login.user_name;
+          
+          var pass=document.login.user_password;
+          
+          
+          if(username.value.length==0)
+              {
+                  alert("UserName cannot be empty");
+                  username.focus();
+                  return false;
+              }
+          
+          if(pass.value.length==0)
+              {
+                  alert("Enter Your Password");
+                  pass.focus();
+                  return false;
+              }
+          
+          
+          return true;
+          
+      }
+      
+      function checkuser(user)
+      {
+       
+       var xmlhttp;
+
+       if (user.length==0)
+  { 
+  document.getElementById("error").innerHTML="";
+  return;
+  }
+       if (window.XMLHttpRequest)
+        {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp=new XMLHttpRequest();
+        }
+       else
+        {// code for IE6, IE5
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange=function()
+        {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200)
+        {
+        
+            document.getElementById("error").innerHTML=xmlhttp.responseText;
+            var str=xmlhttp.responseText;
+            var n=str.search("User");
+            
+            if(n!=-1)
+                {
+                   
+                    document.getElementById("log").disabled=true;
+                    document.login.user_name.value="";
+                }
+            else
+                {
+                    
+                    document.getElementById("log").disabled=false; 
+                }
+                
+        }
+    }
+        xmlhttp.open("GET","logincheck.jsp?u="+user,true);
+        xmlhttp.send();
+            
+      }
+      
+      function user_empty()
+      {
+          var user=document.login.user_name;
+          if(user.value.length==0)
+              {
+                  alert("Enter the Username first");
+                  user.focus();
+                  return false;
+              }
+              return true;
+      }
+      
+      function checkpass(pass)
+      {
+          
+          var user=document.login.user_name.value;
+          
+          var xmlhttp;
+
+       if (pass.length==0)
+  { 
+  document.getElementById("pass").innerHTML="";
+  return;
+  }
+       if (window.XMLHttpRequest)
+        {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp=new XMLHttpRequest();
+        }
+       else
+        {// code for IE6, IE5
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange=function()
+        {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200)
+        {
+        
+            
+            document.getElementById("pass").innerHTML=xmlhttp.responseText;
+            var str=xmlhttp.responseText;
+            var n=str.search("Wrong");
+            
+            if(n!=-1)
+                {
+                   
+                    document.getElementById("log").disabled=true;
+                    document.login.user_password.value="";
+                }
+            else
+                {
+                    
+                    document.getElementById("log").disabled=false; 
+                }
+                
+        }
+    }
+        xmlhttp.open("GET","logincheck.jsp?u="+user+"&p="+pass,true);
+        xmlhttp.send();
+
+      }
+
+  </script> 
+    </head>
+    <body>
+        <div id=header>
+	<center><img src="wood.gif" height="90px" width="800px"/></center>
+	</div>
+  <div id=menubar>
+	<center> <ul> <li> <a href="homepage.jsp"> Home </a>  </li> 
+	<li> <a href="Instructions.jsp"> Instructions </a> </li>
+	<li> <a href="Registration.jsp"> Registration </a> </li>  
+	<li> <a href="Contact_Us.jsp"> Contact Us </a> </li> </ul> </center>
+  </div>
+  <div id=complete>
+	<div id=left>
+	<br> <br> <br>
+	<center> <img src="ladder.jpg" height="600px" width="150px"/> <center>
+	</div>
+
+	<div id=right>
+	<br> <br> <br>
+		<center> <img src="snake.jpg" height="600px" width="150px"/> <center>
+	</div>
+	<div id=middle>
+	<center>
+  <br> <br> <br> <br> <br>
+  <fieldset>
+      <center> <legend> <h4> Log In </h4> </legend> </center>
+ <table>
+ <form name="login" action="Login_Handler " onsubmit="return validate_login();" method="post">
+ <tr> <td>User Name				:		</td> <td> <input type="text" name="user_name" value="" onblur="validusername();checkuser(this.value);"></td> <td id="error"> </td></tr>
+ <tr> <td>Password				:		</td> <td> <input type="password" name="user_password" value="" onblur="validate_password();checkpass(this.value);" onfocus="user_empty()"></td><td id="pass"></td></tr>
+ <tr> <td>								</td> <td> <input type="Submit" name="submit" value="Submit" id="log"></td></tr>
+ </form>
+
+ </table>
+ </fieldset>
+  </center>
+	</div>
+  </div>
+    </body>
+</html>

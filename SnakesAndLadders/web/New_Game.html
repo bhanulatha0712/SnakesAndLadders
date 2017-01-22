@@ -1,0 +1,210 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+     
+ <link href="main.css" rel="StyleSheet" type="text/css"/>
+ 
+ <script type="text/javascript">
+    
+ function validate_newgame()
+      {
+          var username=document.newgame.user_name;
+          var colors=document.forms["newgame"]["color"];
+          var pass=document.newgame.game_password;
+          var re_pass=document.newgame.re_password;
+          var boardname=document.newgame.board_game;
+          
+          
+          if(username.value.length==0)
+              {
+                  alert("Player Name cannot be empty");
+                  username.focus();
+                  return false;
+              }
+          var value=false;
+          for(var i=0;i<colors.length;i++)
+              {
+                  if(colors[i].checked)
+                      {
+                          value=true;
+                      }
+              }
+          if(value==false)
+              {
+                  alert("Select the die color");
+                  return false;
+              }
+          
+          if(pass.value.length==0)
+              {
+                  alert("Enter Your Password");
+                  pass.focus();
+                  return false;
+              }
+          if(re_pass.value.length==0)
+              {
+                  alert("Re Type the password");
+                  re_pass.focus();
+                  return false;
+              }
+          if(boardname.value.length==0)
+              {
+                  alert("Player Name cannot be empty");
+                  boardname.focus();
+                  return false;
+              }
+          
+          
+          return true;
+          
+      }   
+    
+    function validusername()
+{
+    var user_name=document.newgame.user_name;
+    var user_len=user_name.value.length;
+    var check=/^[a-zA-Z][\S]*$/;
+    if(user_len==0 || user_len<5 || user_len>10)
+            {
+                
+               alert("Enter valid  user name (5 to 10 characters and should start with alphabet)");
+               user_name.value="";
+               return false;
+            }
+        else
+            {
+                if(user_name.value.match(check))
+                    {
+                        return true;
+                    }
+                else
+                    {
+                        alert("Enter valid  user name (5 to 10 characters and should start with alphabet)");
+                        user_name.value="";
+                        return false;
+                    }
+            }
+}
+
+function validate_password()
+{
+    var check=/^[a-zA-Z0-9]+$/;
+    var password=document.newgame.game_password;
+    var pass_len=password.value.length;
+    if(pass_len>=5 && pass_len<=10 && password.value.match(check))
+        {
+            return true;
+        }
+    else
+        {
+            alert("Enter valid password (5 to 10 characters and only alphanumerics)");
+            password.value="";
+            return false;
+            
+        }
+}
+
+function validboardname()
+{
+    var board_name=document.newgame.board_name;
+    var board_len=board_name.value.length;
+    var check=/^[a-zA-Z][\S]*$/;
+    if(board_len==0 || board_len<5 || board_len>10)
+            {
+                
+               alert("Enter valid  board name (5 to 10 characters and should start with alphabet)");
+               board_name.value="";
+               return false;
+            }
+        else
+            {
+                if(board_name.value.match(check))
+                    {
+                        return true;
+                    }
+                else
+                    {
+                        alert("Enter valid  board name (5 to 10 characters and should start with alphabet)");
+                        board_name.value="";
+                        return false;
+                    }
+            }
+}
+
+function retype_password()
+{
+    var password=document.newgame.game_password;
+    var re_pass=document.newgame.re_password;
+    if(password.value==re_pass.value)
+        {
+            return true;
+        }
+    else
+        {
+            alert("Retyped password doesn't mach original password");
+            re_pass.value="";
+            return false;
+        }
+}
+    
+    
+    
+    
+ </script>
+ 
+  <title> New Game </title>
+  <meta name="Generator" content="EditPlus">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+ </head>
+
+ <body>
+ <div id=header>
+	<center><img src="wood.gif" height="90px" width="800px"/></center>
+	</div>
+  <div id=menubar>
+	<center> <ul> <li> <a href="homepage.jsp"> Home </a>  </li> 
+	<li> <a href="Instructions.jsp"> Instructions </a> </li>
+	
+	<li> <a href="login_create.jsp"> Join Game </a> </li> 
+	<li> <a href="Contact_Us.jsp"> Contact Us </a> </li> 
+        <li> <a href="LogOut.jsp"> Log Out </a> </li> </ul></center>
+  </div>
+  <div id=complete>
+	<div id=left>
+	<br> <br> <br>
+	<center> <img src="ladder.jpg" height="600px" width="150px"/> <center>
+	</div>
+
+	<div id=right>
+	<br> <br> <br>
+		<center> <img src="snake.jpg" height="600px" width="150px"/> <center>
+	</div>
+	<div id=middle>
+	<center>
+  <br> <br> <br> <br> <br>
+  <fieldset>
+  <legend> Create a New Game </legend>
+  <table>
+ <form name="newgame" action="newgame_details" onsubmit="return validate_newgame();" method="post">
+ <tr> <td>Player Name			:		</td> <td> <input type="text" name="user_name" value="" onblur="validusername()"></td> <td> New User!! &nbsp <a href="Registration.html">Register</a></td></tr>
+ 
+ <tr> <td>Game Password			:		</td> <td> <input type="password" name="game_password" value="" onblur="validate_password()"></td></tr>
+ <tr> <td>Retype Password		:		</td> <td> <input type="password" name="re_password" value="" onblur="retype_password()"></td></tr>
+ <tr> <td>Board Name			:		</td> <td> <input type="text" name="board_name" value="" onblur="validboardname()"></td></tr>
+ <tr> <td>Number of Players		:		</td> <td> <select name="no_players"> <option value="1">1</option><option value="2">2</option>
+															<option value="3">3</option> <option value="4">4</option></select></td></tr>
+ <tr> <td>Die Colour			:		</td> <td> <input type="radio" name="color" value="red">Red<input type="radio" name="color" value="yellow">Yellow
+												   <input type="radio" name="color" value="green">Green<input type="radio" name="color" value="black">Black</td></tr>
+ <tr> <td>								</td> <td> <input type="Submit" name="submit" value="Submit"></td></tr>
+ </form>
+ 
+ </table>
+ </fieldset>
+  
+ </body>
+
+
+
+ </html>
